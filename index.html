@@ -146,20 +146,352 @@
     </header>
 
     <section id="home" class="hero-section">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 style="font-family: 'Georgia', serif;">Wines from all over the world</h1>
-                <p class="subtitle" style="font-family: 'Georgia', serif;">W I N E M A K I N G T R A D I T I O N</p>
-                <p class="description" style="font-family: 'Georgia', serif;">Nunc morbi purus purus nisl, amet. Non
-                    eleifend aliquam nibh ultrices platea platea enim tellus, tincid.</p>
-                <a href="#" class="cta-button" style="background-color: #a37020;">SEE HOW IT'S MADE</a>
-            </div>
-            <div class="hero-image">
-                <img src="./images/product/product-8.png" alt="Premium wine bottle" loading="lazy">
+        <div class="hero-slider">
+            <div class="slider-container">
+                <div class="slide active">
+                    <div class="hero-container">
+                        <div class="hero-content">
+                            <h1 style="font-family: 'Georgia', serif;">Wines from all over the world</h1>
+                            <p class="subtitle" style="font-family: 'Georgia', serif;">W I N E M A K I N G T R A D I T I O N</p>
+                            <p class="description" style="font-family: 'Georgia', serif;">Nunc morbi purus purus nisl, amet. Non
+                                eleifend aliquam nibh ultrices platea platea enim tellus, tincid.</p>
+                            <a href="#" class="cta-button" style="background-color: #a37020;">SEE HOW IT'S MADE</a>
+                        </div>
+                        <div class="hero-image">
+                            <img src="./images/product/product-8.png" alt="Premium wine bottle" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="hero-container">
+                        <div class="hero-content">
+                            <h1 style="font-family: 'Georgia', serif;">Finest Selection of Beer</h1>
+                            <p class="subtitle" style="font-family: 'Georgia', serif;">CRAFT BEER EXCELLENCE</p>
+                            <p class="description" style="font-family: 'Georgia', serif;">Discover our carefully curated selection of craft beers from local and international breweries.</p>
+                            <a href="#" class="cta-button" style="background-color: #a37020;">EXPLORE MORE</a>
+                        </div>
+                        <div class="hero-image">
+                            <img src="./images/product/product-1.png" alt="Premium beer" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="hero-container">
+                        <div class="hero-content">
+                            <h1 style="font-family: 'Georgia', serif;">Premium Spirits Collection</h1>
+                            <p class="subtitle" style="font-family: 'Georgia', serif;">EXCEPTIONAL QUALITY</p>
+                            <p class="description" style="font-family: 'Georgia', serif;">Experience our premium selection of spirits from around the world.</p>
+                            <a href="#" class="cta-button" style="background-color: #a37020;">DISCOVER NOW</a>
+                        </div>
+                        <div class="hero-image">
+                            <img src="./images/product/product-3.png" alt="Premium spirits" loading="lazy">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <style>
+        .hero-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            display: block;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(163, 112, 32, 0.7);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+
+        .slider-nav:hover {
+            background: rgba(163, 112, 32, 0.9);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .slider-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #a37020;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            transition: background-color 0.3s;
+        }
+
+        .indicator.active {
+            background: #a37020;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding: 2rem;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+
+            .slider-nav {
+                padding: 0.5rem;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .manual-btn {
+            background: rgba(163, 112, 32, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .manual-btn:hover {
+            background: rgba(163, 112, 32, 0.9);
+        }
+
+        .play-pause-btn {
+            display: flex;
+            gap: 10px;
+        }
+
+        .play-pause-btn button {
+            background: rgba(163, 112, 32, 0.7);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .play-pause-btn button.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .manual-btn {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            let currentSlide = 0;
+            let interval;
+
+            function showSlide(index) {
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                indicators.forEach(indicator => {
+                    indicator.classList.remove('active');
+                });
+
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function startAutoSlide() {
+                interval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoSlide() {
+                clearInterval(interval);
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                    stopAutoSlide();
+                    startAutoSlide();
+                });
+            });
+
+            // Start auto-sliding
+            startAutoSlide();
+
+            // Pause auto-sliding when hovering over the slider
+            document.querySelector('.hero-slider').addEventListener('mouseenter', stopAutoSlide);
+            document.querySelector('.hero-slider').addEventListener('mouseleave', startAutoSlide);
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.hero-slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const pauseBtn = document.querySelector('.pause-btn');
+            const playBtn = document.querySelector('.play-btn');
+            
+            let currentSlide = 0;
+            let isAutoPlaying = true;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                currentSlide = (index + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            let autoPlay = setInterval(() => {
+                if(isAutoPlaying) {
+                    showSlide(currentSlide + 1);
+                }
+            }, 5000);
+            
+            // Manual Navigation
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+            
+            // Play/Pause Controls
+            pauseBtn.addEventListener('click', () => {
+                isAutoPlaying = false;
+                pauseBtn.classList.remove('active');
+                playBtn.classList.add('active');
+            });
+            
+            playBtn.addEventListener('click', () => {
+                isAutoPlaying = true;
+                playBtn.classList.remove('active');
+                pauseBtn.classList.add('active');
+            });
+            
+            // Touch Events
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            slider.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if(Math.abs(diff) > swipeThreshold) {
+                    if(diff > 0) {
+                        showSlide(currentSlide + 1); // Swipe left
+                    } else {
+                        showSlide(currentSlide - 1); // Swipe right
+                    }
+                }
+            }
+            
+            // Pause on hover
+            slider.addEventListener('mouseenter', () => {
+                isAutoPlaying = false;
+            });
+            
+            slider.addEventListener('mouseleave', () => {
+                isAutoPlaying = true;
+            });
+        });
+    </script>
 
     <section class="info-section">
         <div class="info-box">
