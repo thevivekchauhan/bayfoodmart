@@ -217,6 +217,8 @@
             <h2>FEATURED COLLECTION</h2>
         </div>
         <div class="slider-container">
+            <!-- <button class="slider-nav prev-btn">&lt;</button>
+            <button class="slider-nav next-btn">&gt;</button> -->
             <div class="cards-track">
                 <div class="card">
                     <img src="./images/main product/1.png" alt="Wine Glass">
@@ -295,59 +297,73 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const track = document.querySelector('.cards-track');
-            const cards = document.querySelectorAll('.card');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.prev');
-            const nextBtn = document.querySelector('.next');
-
-            let currentIndex = 0;
-            const cardCount = cards.length;
-
-            function updateSlider() {
+            const tracks = document.querySelectorAll('.cards-track');
+            
+            tracks.forEach(track => {
+                const cards = track.querySelectorAll('.card');
+                let currentIndex = 0;
                 const cardWidth = cards[0].offsetWidth +
                     parseInt(getComputedStyle(cards[0]).marginLeft) +
                     parseInt(getComputedStyle(cards[0]).marginRight);
-
-                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
+                
+                const prevBtn = track.parentElement.querySelector('.prev-btn');
+                const nextBtn = track.parentElement.querySelector('.next-btn');
+                
+                function slideNext() {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    track.style.transition = 'transform 0.5s ease-in-out';
+                    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                }
+                
+                // Auto-slide every 3 seconds
+                const autoSlideInterval = setInterval(slideNext, 3000);
+                
+                // Navigation button clicks
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        clearInterval(autoSlideInterval);
+                        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                    });
+                    
+                    nextBtn.addEventListener('click', () => {
+                        clearInterval(autoSlideInterval);
+                        slideNext();
+                    });
+                }
+                
+                // Pause auto-slide on hover
+                track.addEventListener('mouseenter', () => {
+                    clearInterval(autoSlideInterval);
                 });
-            }
-
-            // Dot click events
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateSlider();
-                });
             });
-
-            // Arrow click events
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + cardCount) % cardCount;
-                updateSlider();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % cardCount;
-                updateSlider();
-            });
-
-            // Auto-slide for desktop
-            if (window.matchMedia('(min-width: 992px)').matches) {
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % cardCount;
-                    updateSlider();
-                }, 3000);
-            }
-
-            // Handle window resize
-            window.addEventListener('resize', updateSlider);
         });
     </script>
+    <style>
+        .slider-container {
+            position: relative;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .prev-btn {
+            left: 10px;
+        }
+        
+        .next-btn {
+            right: 10px;
+        }
+    </style>
 
 
 
@@ -790,6 +806,8 @@
             <h2>FEATURED COLLECTION</h2>
         </div>
         <div class="slider-container">
+            <!-- <button class="slider-nav prev-btn">&lt;</button>
+            <button class="slider-nav next-btn">&gt;</button> -->
             <div class="cards-track">
                 <div class="card">
                     <img src="./images/main product/1.png" alt="Wine Glass">
@@ -868,57 +886,46 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const track = document.querySelector('.cards-track');
-            const cards = document.querySelectorAll('.card');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.prev');
-            const nextBtn = document.querySelector('.next');
-
-            let currentIndex = 0;
-            const cardCount = cards.length;
-
-            function updateSlider() {
+            const tracks = document.querySelectorAll('.cards-track');
+            
+            tracks.forEach(track => {
+                const cards = track.querySelectorAll('.card');
+                let currentIndex = 0;
                 const cardWidth = cards[0].offsetWidth +
                     parseInt(getComputedStyle(cards[0]).marginLeft) +
                     parseInt(getComputedStyle(cards[0]).marginRight);
-
-                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
+                
+                const prevBtn = track.parentElement.querySelector('.prev-btn');
+                const nextBtn = track.parentElement.querySelector('.next-btn');
+                
+                function slideNext() {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    track.style.transition = 'transform 0.5s ease-in-out';
+                    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                }
+                
+                // Auto-slide every 3 seconds
+                const autoSlideInterval = setInterval(slideNext, 3000);
+                
+                // Navigation button clicks
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        clearInterval(autoSlideInterval);
+                        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                    });
+                    
+                    nextBtn.addEventListener('click', () => {
+                        clearInterval(autoSlideInterval);
+                        slideNext();
+                    });
+                }
+                
+                // Pause auto-slide on hover
+                track.addEventListener('mouseenter', () => {
+                    clearInterval(autoSlideInterval);
                 });
-            }
-
-            // Dot click events
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateSlider();
-                });
             });
-
-            // Arrow click events
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + cardCount) % cardCount;
-                updateSlider();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % cardCount;
-                updateSlider();
-            });
-
-            // Auto-slide for desktop
-            if (window.matchMedia('(min-width: 992px)').matches) {
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % cardCount;
-                    updateSlider();
-                }, 3000);
-            }
-
-            // Handle window resize
-            window.addEventListener('resize', updateSlider);
         });
     </script>
 
@@ -939,6 +946,8 @@
             <h2>FEATURED COLLECTION</h2>
         </div>
         <div class="slider-container">
+            <!-- <button class="slider-nav prev-btn">&lt;</button>
+            <button class="slider-nav next-btn">&gt;</button> -->
             <div class="cards-track">
                 <div class="card">
                     <img src="./images/main product/1.png" alt="Wine Glass">
@@ -1017,57 +1026,46 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const track = document.querySelector('.cards-track');
-            const cards = document.querySelectorAll('.card');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.prev');
-            const nextBtn = document.querySelector('.next');
-
-            let currentIndex = 0;
-            const cardCount = cards.length;
-
-            function updateSlider() {
+            const tracks = document.querySelectorAll('.cards-track');
+            
+            tracks.forEach(track => {
+                const cards = track.querySelectorAll('.card');
+                let currentIndex = 0;
                 const cardWidth = cards[0].offsetWidth +
                     parseInt(getComputedStyle(cards[0]).marginLeft) +
                     parseInt(getComputedStyle(cards[0]).marginRight);
-
-                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-
-                // Update dots
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
+                
+                const prevBtn = track.parentElement.querySelector('.prev-btn');
+                const nextBtn = track.parentElement.querySelector('.next-btn');
+                
+                function slideNext() {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    track.style.transition = 'transform 0.5s ease-in-out';
+                    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                }
+                
+                // Auto-slide every 3 seconds
+                const autoSlideInterval = setInterval(slideNext, 3000);
+                
+                // Navigation button clicks
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        clearInterval(autoSlideInterval);
+                        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                    });
+                    
+                    nextBtn.addEventListener('click', () => {
+                        clearInterval(autoSlideInterval);
+                        slideNext();
+                    });
+                }
+                
+                // Pause auto-slide on hover
+                track.addEventListener('mouseenter', () => {
+                    clearInterval(autoSlideInterval);
                 });
-            }
-
-            // Dot click events
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateSlider();
-                });
             });
-
-            // Arrow click events
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + cardCount) % cardCount;
-                updateSlider();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % cardCount;
-                updateSlider();
-            });
-
-            // Auto-slide for desktop
-            if (window.matchMedia('(min-width: 992px)').matches) {
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % cardCount;
-                    updateSlider();
-                }, 3000);
-            }
-
-            // Handle window resize
-            window.addEventListener('resize', updateSlider);
         });
     </script>
 
